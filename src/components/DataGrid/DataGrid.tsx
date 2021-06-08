@@ -1,15 +1,21 @@
 import React from "react";
 
-import { HeadCell, HeadLine, Table, TableCell } from "./DataGrid.styled";
+import { HeadLine, Table, TableCell } from "./DataGrid.styled";
+import { headersDataType } from "./helper";
+import DataGridHead from "./DataGridHead";
 
-function DataGrid({ data = [] }: { data: Array<any> }) {
+function DataGrid({
+  headersData = [],
+  data = [],
+}: {
+  headersData: Array<headersDataType>;
+  data: Array<any>;
+}) {
   return (
     <Table>
       <thead>
         <HeadLine>
-          <HeadCell>Col 1</HeadCell>
-          <HeadCell>Col 2</HeadCell>
-          <HeadCell>Col 3</HeadCell>
+          <DataGridHead headersData={headersData} />
         </HeadLine>
       </thead>
       <tbody>
