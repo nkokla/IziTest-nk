@@ -26,6 +26,7 @@ function FilterModal({
   onClickOut,
 }: FilterModalProps) {
   const modalRef = useRef();
+  const inputRef = useRef<HTMLInputElement>();
   const selectRadio = useCallback(
     (value: string) => () => onChangeType(value),
     [onChangeType]
@@ -34,6 +35,10 @@ function FilterModal({
     (event) => onChangeQuery(event.target.value),
     [onChangeQuery]
   );
+
+  useEffect(() => {
+    inputRef?.current?.focus();
+  }, []);
 
   useEffect(() => {
     const handleClickOut = (e: any) => {
@@ -53,6 +58,7 @@ function FilterModal({
   return (
     <Modal ref={modalRef}>
       <InputQuery
+        ref={inputRef}
         defaultValue={isFiltered ? query : ""}
         onKeyUp={updateQuery}
       />
