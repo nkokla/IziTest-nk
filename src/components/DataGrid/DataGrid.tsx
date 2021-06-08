@@ -1,7 +1,7 @@
-import React, { useMemo } from "react";
+import React, { useReducer, useMemo } from "react";
 
-import { HeadLine, Table } from "./DataGrid.styled";
-import { headersDataType } from "./helper";
+import { Table, HeadLine } from "./DataGrid.styled";
+import { initialFilter, filterReducer, headersDataType } from "./helper";
 import DataGridBody from "./DataGridBody";
 import DataGridHead from "./DataGridHead";
 
@@ -12,6 +12,8 @@ function DataGrid({
   headersData: Array<headersDataType>;
   data: Array<any>;
 }) {
+  const [filter, dispatchFilter] = useReducer(filterReducer, initialFilter);
+
   const dataSetHead = useMemo(
     () => headersData.map(({ name }) => name),
     [headersData]
@@ -21,11 +23,15 @@ function DataGrid({
     <Table>
       <thead>
         <HeadLine>
-          <DataGridHead headersData={headersData} />
+          <DataGridHead
+            filter={filter}
+            headersData={headersData}
+            dispatcher={dispatchFilter}
+          />
         </HeadLine>
       </thead>
       <tbody>
-        <DataGridBody data={data} dataSetHead={dataSetHead} />
+        <DataGridBody data={data} dataSetHead={dataSetHead} filter={filter} />
       </tbody>
     </Table>
   );
