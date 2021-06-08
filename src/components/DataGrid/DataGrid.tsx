@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useMemo } from "react";
 
-import { HeadLine, Table, TableCell } from "./DataGrid.styled";
+import { HeadLine, Table } from "./DataGrid.styled";
 import { headersDataType } from "./helper";
+import DataGridBody from "./DataGridBody";
 import DataGridHead from "./DataGridHead";
 
 function DataGrid({
@@ -11,6 +12,11 @@ function DataGrid({
   headersData: Array<headersDataType>;
   data: Array<any>;
 }) {
+  const dataSetHead = useMemo(
+    () => headersData.map(({ name }) => name),
+    [headersData]
+  );
+
   return (
     <Table>
       <thead>
@@ -19,13 +25,7 @@ function DataGrid({
         </HeadLine>
       </thead>
       <tbody>
-        {data.map(({ email, jobName, customer }) => (
-          <tr key={email}>
-            <TableCell>{email}</TableCell>
-            <TableCell>{jobName}</TableCell>
-            <TableCell>{customer}</TableCell>
-          </tr>
-        ))}
+        <DataGridBody data={data} dataSetHead={dataSetHead} />
       </tbody>
     </Table>
   );
