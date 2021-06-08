@@ -24,7 +24,7 @@ export const ModalTitle = styled.div`
   margin: 1em 0;
 `;
 
-export const InputQuery = styled.input.attrs({ type: "text" })`
+export const InputQuery = styled.input.attrs({ type: "text" })<{ ref: any }>`
   border: 1px solid #196cff;
   border-radius: 4px;
   padding: 1em;
