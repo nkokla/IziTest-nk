@@ -1,12 +1,8 @@
 import React, { useCallback, useRef, useEffect } from "react";
 
-import {
-  Modal,
-  ModalTitle,
-  InputQuery,
-  Label,
-  Radio,
-} from "./FilterModal.styled";
+import { Modal, ModalTitle, Label } from "./FilterModal.styled";
+
+import { InputText, Radio } from "../Form";
 
 type FilterModalProps = {
   query: string;
@@ -57,7 +53,7 @@ function FilterModal({
 
   return (
     <Modal ref={modalRef}>
-      <InputQuery
+      <InputText
         ref={inputRef}
         defaultValue={isFiltered ? query : ""}
         onKeyUp={updateQuery}
