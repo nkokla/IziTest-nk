@@ -1,5 +1,7 @@
 import styled, { css } from "styled-components";
 
+import { Filter as FilterIcon } from "../Icon";
+
 export const Table = styled.table.attrs({})`
   border-collapse: collapse;
   margin: 0.5em;
@@ -28,12 +30,11 @@ export const HeadCell = styled.th`
   cursor: default;
 `;
 
-export const Mark = styled.div<{ isMarked?: Boolean }>`
+type MarkType = { isMarked?: Boolean };
+export const Mark = styled(FilterIcon).attrs<MarkType>(({ isMarked }) => ({
+  color: isMarked ? "#196cff" : "currentColor",
+}))<MarkType>`
   display: inline-block;
-  width: 0.5em;
-  height: 0.5em;
-  margin: 0 0.5em;
-  border-radius: 0.5em;
-  border: 1px solid #196cff;
-  background-color: ${({ isMarked }) => (isMarked ? "#196cff" : "transparent")};
+  font-size: 1.1em;
+  margin: 0 0.5em -2px;
 `;
